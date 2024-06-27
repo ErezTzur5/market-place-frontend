@@ -12,11 +12,21 @@ export const fetchProducts = async () => {
   }
 };
 
+export const fetchProduct = async (id) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching product with ID ${id}:`, error);
+    throw error;
+  }
+};
+
 export const deleteProduct = async (id) => {
   try {
     await axios.delete(`${API_BASE_URL}/${id}`);
   } catch (error) {
-    console.error("Error deleting product:", error);
+    console.error(`Error deleting product with ID ${id}:`, error);
     throw error;
   }
 };
@@ -26,7 +36,7 @@ export const updateProduct = async (id, updatedProduct) => {
     const response = await axios.put(`${API_BASE_URL}/${id}`, updatedProduct);
     return response.data;
   } catch (error) {
-    console.error("Error updating product:", error);
+    console.error(`Error updating product with ID ${id}:`, error);
     throw error;
   }
 };
